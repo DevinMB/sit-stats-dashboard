@@ -1,20 +1,26 @@
 <template>
   <div class="dashboard-container">
-    <device-status></device-status>
-    <sit-statistics></sit-statistics>
+
+    <device-selection></device-selection>
+    <device-stats-summary></device-stats-summary>
   </div>
 </template>
 
 <script>
-import DeviceStatus from './components/DeviceStatus.vue';
-import SitStatistics from './components/SitStatistics.vue';
+
+import DeviceSelection from './components/DeviceSelection.vue';
+import DeviceStatsSummary from './components/DeviceStatsSummary.vue';
+import { mapState } from 'vuex';
 
 
 export default {
   name: 'App',
   components: {
-    DeviceStatus,
-    SitStatistics
+    DeviceSelection,
+    DeviceStatsSummary
+  },
+  computed: {
+    ...mapState(['deviceStats'])
   }
 };
 </script>
@@ -25,5 +31,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  border: 1px solid black;
 }
 </style>

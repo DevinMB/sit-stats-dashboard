@@ -1,11 +1,11 @@
 <template>
-    <div class="device-status">
-      <h2>Device Status</h2>
+    <div class="device-listing">
+      <h2>Device Listing</h2>
       <div v-if="loading">Loading...</div>
       <div v-else-if="error">Error loading device status.</div>
       <ul v-else>
         <li v-for="(device) in devices" :key="device">
-          {{ device}}
+          {{device}}
         </li>
       </ul>
     </div>
@@ -15,7 +15,7 @@
   import APIHandler from '../services/APIHandler.js';
   
   export default {
-    name: 'DeviceStatus',
+    name: 'DeviceListing',
     data() {
       return {
         devices: [],
@@ -26,7 +26,7 @@
     async created() {
       try {
         this.loading = true;
-        this.devices = await APIHandler.fetchDeviceStatus();
+        this.devices = await APIHandler.getDeviceListing();
         this.loading = false;
       } catch (error) {
         this.error = error;
