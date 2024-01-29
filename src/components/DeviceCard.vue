@@ -5,8 +5,11 @@
       </div>
       <div class="device-info">
         <h3 class="device-name">{{ device.deviceId }}</h3>
-        <p class="device-status">Status: {{ device.status }}</p>
-        <router-link :to="`/device/${device.id}`" class="details-link">View Details</router-link>
+        <p class="device-status"> 
+        <span :class="{'status-circle': true, 'active': device.active, 'inactive': !device.active}"></span>
+        {{ device.status }}
+        </p>       
+      <router-link :to="`/device/${device.id}`" class="details-link">View Details</router-link>
       </div>
     </div>
   </template>
@@ -80,5 +83,22 @@
   .details-link:hover {
     text-decoration: underline;
   }
+
+  .status-circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.status-circle.active {
+  background-color: green;
+}
+
+.status-circle.inactive {
+  background-color: grey;
+}
   </style>
   

@@ -4,7 +4,7 @@
       v-for="(device, deviceId) in devices"
       :key="deviceId"
       :device="device"
-      @selectDevice="selectedDevice = $event"
+      @selectDevice="toggleDeviceStats"
     />
   </div>
 
@@ -43,6 +43,12 @@ export default {
     return{
       selectedDevice: null
     }
+  },
+  methods: {
+    toggleDeviceStats(deviceId) {
+      // If the clicked device is already selected, deselect it, otherwise select it
+      this.selectedDevice = this.selectedDevice === deviceId ? null : deviceId;
+    },
   }
 };
 </script>

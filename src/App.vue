@@ -35,10 +35,12 @@ export default {
 
 <style>
 #app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 }
 
 header {
@@ -48,6 +50,7 @@ header {
 }
 
 main {
+  flex: 1; /* Allows main to grow and take up available space */
   padding: 20px;
 }
 
