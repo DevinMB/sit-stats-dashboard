@@ -1,5 +1,5 @@
 <template>
-    <div class="device-card">
+    <div class="device-card" @click="handleClick">
       <div class="device-image-container">
         <img src="../assets/chair-sensor-1.jpg" alt="Device Image" class="device-image" />
       </div>
@@ -20,6 +20,11 @@
         required: true,
       },
     },
+    methods: {
+      handleClick() {
+        this.$emit('selectDevice', this.device.deviceId);
+      }
+  }
   };
   </script>
   

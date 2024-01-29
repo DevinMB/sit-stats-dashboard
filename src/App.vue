@@ -7,6 +7,7 @@
 
     <main>
       <DeviceGrid />
+      
     </main>
 
     <footer>

@@ -33,8 +33,6 @@
 import APIHandler from '../services/APIHandler.js';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-// import datepicker from 'vue-datepicker'
-// import 'vue3-datepicker/dist/vue3-datepicker.css';
 import { mapActions } from 'vuex';
 
 export default {
@@ -68,7 +66,7 @@ export default {
     this.loading = false;
   },
   methods: {
-    ...mapActions(['updateDeviceStats', 'updateDeviceSits']),
+    ...mapActions(['updateDeviceStats']),
     async applyFilters() {
       if (!this.selectedDevice) {
         alert("Please select a device");
@@ -80,7 +78,7 @@ export default {
         const endTimestampFormatted = this.formatDate(this.filters.endTimestamp);
         this.deviceStats = await APIHandler.getDeviceSummaryStats(this.selectedDevice, startTimestampFormatted, endTimestampFormatted, this.filters.minDuration, this.filters.maxDuration, this.filters.minAvgValue, this.filters.maxAvgValue);
         this.updateDeviceStats(this.deviceStats);
-        this.updateDeviceSits(await APIHandler.getDeviceSits(this.selectedDevice));
+        this.updateDeviceSits(await APIHandler.getDeviceSits(this.selectedDevice))
       } catch (error) {
         this.error = error.message;
       }
