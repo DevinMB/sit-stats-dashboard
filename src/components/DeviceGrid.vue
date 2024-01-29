@@ -8,10 +8,14 @@
     />
   </div>
 
-  <DeviceStatsSummary
-    v-if="selectedDevice"
-    :deviceId="selectedDevice"
-  />
+  <transition name="expand">
+    <DeviceStatsSummary
+      v-if="selectedDevice"
+      :deviceId="selectedDevice"
+      :key="selectedDevice"
+    />
+  </transition>
+  
 </template>
 
 <script>
@@ -51,6 +55,15 @@ export default {
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px; /* Adjust the max-width as needed */
+  }
+
+  .expand-enter-active, .expand-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+  transition-timing-function: cubic-bezier(0, 1.05, 0.35, 1);
+}
+  .expand-enter, .expand-leave-to {
+    opacity: 0;
+    transform: scale(0.5);
   }
 
   @media (max-width: 600px) {
