@@ -31,7 +31,7 @@ const onConnectedCallback = () => {
 };
 
 const connect = () => {
-    const socket = new SockJS('http://192.168.1.34:5001/ws');
+    const socket = new SockJS('http://192.168.1.250:5001/ws');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, () => {
         onConnectedCallback(); // This is called only after the connection is established
