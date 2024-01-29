@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80" 
+    volumes:
+      - web_content:/usr/share/nginx/html
+    environment:
+      - TZ=America/Detroit
+    networks:
+      - web-net
+    container_name: sit-stats-dashboard
+    command: |
+      /bin/sh -c "
+      set -e;  # Stop execution on any error
+      rm -rf /usr/share/nginx/html/*;
+      wget -O release.tar.gz 'https://github.com/DevinMB/sit-stats-dashboard/archive/refs/tags/v1.0.1.tar.gz';
+      tar -xzvf release.tar.gz --strip-components=2 -C /usr/share/nginx/html sit-stats-dashboard-1.0.1/dist;
+      rm release.tar.gz;
+
+      nginx -g 'daemon off;';"
+
+
+
+
+networks:
+  web-net:
+    driver: bridge
+
+volumes:
+  web_content:
