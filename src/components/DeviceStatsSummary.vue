@@ -11,15 +11,15 @@
     <div v-else-if="deviceStats" class="device-stats-container">
         <div class="stat-section">
           <h5>Last Sit</h5>
+          <p><strong>Date Time:</strong> {{ formatEpochToDateTime( deviceStats.lastSit.startTimestamp )}}</p>
           <p><strong>Duration:</strong> {{ formatDuration(deviceStats.lastSit.sitDuration) }}</p>
-          <p><strong>Time Bucket:</strong> {{ deviceStats.lastSit.timeBucket }}</p>
           <p><strong>Average Value:</strong> {{ deviceStats.lastSit.avgValue }}</p>
         </div>
 
         <div class="stat-section">
           <h5>Max Sit</h5>
+          <p><strong>Date Time:</strong> {{ formatEpochToDateTime( deviceStats.maxSit.startTimestamp )}}</p>
           <p><strong>Duration:</strong> {{ formatDuration(deviceStats.maxSit.sitDuration) }}</p>
-          <p><strong>Time Bucket:</strong> {{ deviceStats.maxSit.timeBucket }}</p>
           <p><strong>Average Value:</strong> {{ deviceStats.maxSit.avgValue }}</p>
         </div>
 
@@ -112,6 +112,20 @@ export default {
     },
     formatDateToEpoch(date) {
       return date ? Math.floor(date.getTime() / 1000) : null; // Convert to Unix timestamp in seconds
+    },
+    formatEpochToDateTime(epoch) {
+      const date = new Date(epoch * 1000); // Convert epoch to milliseconds
+      const options = {
+        timeZone: 'America/New_York', // EST timezone
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true // Use 12-hour format with AM/PM
+        };
+      return new Intl.DateTimeFormat('en-US', options).format(date);
     },
     toggleFilters() {
       this.showFilters = !this.showFilters;
